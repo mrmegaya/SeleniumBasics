@@ -1,4 +1,5 @@
 package basics;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -9,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 /*import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;*/
-public class EditButton extends Driverinit{
+public class EditButton {
 
 	public static void main(String[] args) throws InterruptedException {
 		// System properties have been set and called from DriverUnit class.
@@ -18,7 +19,8 @@ public class EditButton extends Driverinit{
 		WebDriver driver=new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		/*driver.get("http://www.leafground.com/");
+		driver.navigate();
+		driver.get("http://www.leafground.com/");
 		//--------------EditBox-----------------
 		  //Thread.sleep(3000);
 		driver.findElement(By.xpath("//img[@alt=\"Edit / Text Fields\"]")).click();
@@ -41,14 +43,14 @@ public class EditButton extends Driverinit{
 		driver.findElement(By.xpath("//img[@alt=\"logo Testleaf\"]")).click();		 
 		Thread.sleep(3000);
 		//-------------Button--------------
-		 * //img[@alt="Buttons"]
+		 //img[@alt="Buttons"]
 		driver.findElement(By.xpath("//img[@class=\"wp-categories-icon svg-image\" and @alt=\"Buttons\"]")).click();
 		Thread.sleep(3000);
 		//Going Back to Home
 		driver.findElement(By.xpath("//button[@id=\"home\"]")).click();
 		driver.findElement(By.xpath("//img[@class=\"wp-categories-icon svg-image\" and @alt=\"Buttons\"]")).click();
 		//getLocation of an attribute using Points type
-		Point xyco=driver.findElement(By.xpath("//button[@id=\"position\"]")).getLocation();
+		Point xyco=driver.findElement(By.id("position")).getLocation();
 		int xco=xyco.getX();
 		int yco=xyco.getY();
 		System.out.println("X positions is : "+xco+" and Y Position is : "+yco);
@@ -59,13 +61,29 @@ public class EditButton extends Driverinit{
 		Dimension size=driver.findElement(By.xpath("//button[@id=\"color\"]")).getSize();
 		int hi=size.getHeight();
 		int wd=size.getWidth();
-		System.out.println("height is : "+hi+" Width is :"+wd);*/
+		System.out.println("height is : "+hi+" Width is :"+wd);
 		
 		//-------------HyperLink--------------
-		driver.get("http://www.leafground.com/pages/Button.html");
 		driver.findElement(By.xpath("//img[@alt=\"logo Testleaf\"]")).click();
+		
+		
 		driver.findElement(By.xpath("//img[@alt=\"Link\"]")).click();
 		driver.findElement(By.linkText("Go to Home Page")).click();
+		driver.navigate().back();
+		String lin= driver.findElement(By.partialLinkText("Find where")).getAttribute("href");
+		System.out.println("The link will go to : "+lin);
+		
+		driver.findElement(By.partialLinkText("Verify am I")).click();	
+		String title=driver.getTitle();
+		if(title.contains("404"))
+		{
+			System.out.println("This is a broken link");
+		}
+		driver.navigate().back();
+		
+		List<WebElement> tit =driver.findElements(By.tagName("a"));
+		int linkcount=tit.size();
+		System.out.println(linkcount);
 		
 		Thread.sleep(3000);
 		driver.quit();
