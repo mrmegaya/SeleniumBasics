@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 /*import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;*/
-public class EditButton {
+public class EditButtonLink {
 
 	public static void main(String[] args) throws InterruptedException {
 		// System properties have been set and called from DriverUnit class.
